@@ -1,0 +1,28 @@
+{
+  "name": "landchain-backend",
+  "version": "3.0.0",
+  "description": "LandChain backend with SQLite and session-based authentication.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "land",
+    "registry",
+    "blockchain"
+  ],
+  "author": "Agornyrah Eric",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.19.0",
+    "connect-sqlite3": "^0.9.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-session": "^1.18.1",
+    "fabric-network": "^2.2.20",
+    "js-yaml": "^4.1.0",
+    "sequelize": "^6.37.7",
+    "sqlite3": "^5.1.6"
+  }
+}

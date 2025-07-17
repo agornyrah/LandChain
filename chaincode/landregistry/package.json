@@ -1,0 +1,9 @@
+{
+  "name": "chaincode-landregistry",
+  "version": "1.0.0",
+  "description": "Land registry chaincode for Hyperledger Fabric",
+  "main": "index.js",
+  "dependencies": {
+    "fabric-contract-api": "^2.4.1"
+  }
+} 
