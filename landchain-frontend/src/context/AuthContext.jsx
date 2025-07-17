@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
+import api from '../services/api';
 
 export const AuthContext = createContext();
 
@@ -10,8 +11,8 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     async function fetchUser() {
       try {
-        const res = await fetch('/api/auth/me', { credentials: 'include' });
-        const data = await res.json();
+        const res = await api.get('/auth/me');
+        const data = res.data;
         if (data.success) {
           setUser(data.user);
         } else {

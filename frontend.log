@@ -1,0 +1,12 @@
+
+> landchain-frontend@0.0.0 dev
+> vite
+
+11:26:05 AM [vite] (client) Re-optimizing dependencies because lockfile has changed
+Port 5173 is in use, trying another one...
+
+  VITE v7.0.4  ready in 154 ms
+
+  ➜  Local:   http://localhost:5174/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help

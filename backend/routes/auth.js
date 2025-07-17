@@ -67,4 +67,17 @@ router.get('/me', (req, res) => {
   }
 });
 
+// @route   POST api/auth/logout
+// @desc    Logout current user
+// @access  Private
+router.post('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).json({ success: false, message: 'Logout failed' });
+    }
+    res.clearCookie('connect.sid');
+    res.json({ success: true, message: 'Logged out successfully' });
+  });
+});
+
 module.exports = router;
