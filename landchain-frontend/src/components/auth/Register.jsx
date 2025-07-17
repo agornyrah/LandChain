@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import api from '../../services/api';
 import './Register.css';
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const navigate = useNavigate();
 
   return (
     <div className="register-bg">
@@ -29,20 +32,25 @@ const Register = () => {
               return;
             }
             try {
-              const res = await fetch('/api/auth/register', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ fullname, email, phone, address, password }),
+              const res = await api.post('/auth/register', { 
+                fullname, 
+                email, 
+                phone, 
+                address, 
+                password 
               });
-              const data = await res.json();
+              const data = res.data;
               if (data.success) {
-                setSuccess('Registration successful! You can now log in.');
+                setSuccess('Registration successful! Redirecting to login...');
                 form.reset();
+                setTimeout(() => {
+                  navigate('/login');
+                }, 1500);
               } else {
                 setError(data.message || 'Registration failed');
               }
-            } catch {
-              setError('Error registering. Please try again.');
+            } catch (err) {
+              setError(err.response?.data?.message || 'Error registering. Please try again.');
             } finally {
               setLoading(false);
             }
@@ -80,7 +88,7 @@ const Register = () => {
           {success && <div className="register-success">{success}</div>}
         </form>
         <div className="register-footer">
-          Already have an account? <a href="/login">Login</a>
+          Already have an account? <a href="/login" onClick={(e) => { e.preventDefault(); navigate('/login'); }}>Login</a>
         </div>
       </div>
     </div>

@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
+import api from '../../services/api';
 import './Login.css';
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   return (
     <div className="login-bg">
@@ -20,23 +25,19 @@ const Login = () => {
             const email = form.email.value;
             const password = form.password.value;
             try {
-              const res = await fetch('/api/auth/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password }),
-                credentials: 'include',
-              });
-              const data = await res.json();
+              const res = await api.post('/auth/login', { email, password });
+              const data = res.data;
               if (data.success) {
                 setSuccess('Login successful! Redirecting...');
+                login(data.user);
                 setTimeout(() => {
-                  window.location.href = '/dashboard';
+                  navigate('/dashboard');
                 }, 1200);
               } else {
                 setError(data.message || 'Login failed');
               }
-            } catch {
-              setError('Error logging in. Please try again.');
+            } catch (err) {
+              setError(err.response?.data?.message || 'Error logging in. Please try again.');
             } finally {
               setLoading(false);
             }

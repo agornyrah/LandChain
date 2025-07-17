@@ -1,0 +1,28 @@
+
+> landchain-backend@3.0.0 start
+> node server.js
+
+Executing (default): SELECT name FROM sqlite_master WHERE type='table' AND name='Properties';
+Executing (default): PRAGMA INDEX_LIST(`Properties`)
+Executing (default): PRAGMA INDEX_INFO(`sqlite_autoindex_Properties_1`)
+node:events:496
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::5000
+    at Server.setupListenHandle [as _listen2] (node:net:1939:16)
+    at listenInCluster (node:net:1996:12)
+    at Server.listen (node:net:2101:7)
+    at Function.listen (/workspace/backend/node_modules/express/lib/application.js:635:24)
+    at /workspace/backend/server.js:51:7
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1975:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '::',
+  port: 5000
+}
+
+Node.js v22.16.0
